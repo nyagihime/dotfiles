@@ -1,0 +1,147 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+# エイリアス登録
+alias ll='ls -la'
+
+# カスタム関数登録
+function tabname {
+    echo -ne "\033]0;"$*"\007"
+}
+
+# 重複パスを登録しない
+typeset -U path cdpath fpath manpath
+
+# パスを通す
+export PATH="$HOME/.anyenv/bin:$PATH"
+export PATH="$HOME/.anyenv/envs/ndenv/shims:$PATH"
+eval "$(anyenv init -)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/yanagimachi/.sdkman"
+[[ -s "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh"
+
+
+# nyae? 有効化
+setopt correct
+
+# zplug 有効化
+# export ZPLUG_HOME=/usr/local/opt/zplug
+# source $ZPLUG_HOME/init.zsh
+
+# 色名でプロンプトの色を変えられるように
+autoload -Uz colors # black red green yellow blue magenta cyan white
+colors
+
+# ------------------------------------------------
+# 入力補完関連
+# ------------------------------------------------
+# 補完候補をカーソルで選択できるようにする
+autoload -U compinit
+compinit -u
+zstyle ':completion:*:default' menu select=1
+
+# tab 補完で大文字小文字を区別しない
+zstyle ':completion:' matcher-list 'm:{a-z}={A-Z}'
+
+# わざわざ大文字を入力した時は小文字の候補を補完しない
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+
+# でもやっぱり大文字の候補が見つからない場合には, 小文字の候補を補完する
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
+
+
+# プロンプトいじる
+# ------------------------------------------------
+# （左）
+# PROMPT="%F{036}[%n@%m]%{$reset_color%} @ %{${fg[blue]}%}[%(3~,%-1~/.../%1~,%~)]%{${reset_color}%}"
+PROMPT="%F{blue}(ﾉ-_-)ﾉ ~┻━┻･..｡;･'%{$reset_color%} @ %{${fg[cyan]}%}[%(3~,%-1~/.../%1~,%~)]%{${reset_color}%}"
+
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+PROMPT=$PROMPT'${vcs_info_msg_0_}'
+
+case ${USERNAME} in
+'root')
+PROMPT=$PROMPT'
+%{${fg[red]}%}%}❯%{${reset_color}%} '
+		;;
+*)
+PROMPT=$PROMPT'
+%{${fg[yellow]}%}%}❯%{${reset_color}%} '
+		;;
+esac
+
+# （右）今は使ってない
+# RPROMPT=''
+
+
+# anyenv 関係（起動が遅いのは多分これのせい）
+# 毎回 rehash が走るのか起動が遅くなるので --no-rehash する。（必要なら自分でrehash するし）
+if [ -d $HOME/.anyenv ] ; then
+	export PATH="$HOME/.anyenv/bin:$PATH"
+	eval "$(anyenv init - --no-rehash)"
+fi
+
+# .zshrc をコンパイル。
+# .zshrc に変更があればまた自動コンパイル
+if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
+  zcompile ~/.zshrc
+fi
+
+
+
+# export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+# export PATH="$HOME/.anyenv/bin:$PATH"
+# eval "$(anyenv init -)"
+
+
+# history関連
+# ------------------------------------------------
+# 履歴ファイルの保存先
+export HISTFILE=${HOME}/.zsh_history
+
+# メモリに保存される履歴の件数
+export HISTSIZE=1000
+
+# 履歴ファイルに保存される履歴の件数
+export SAVEHIST=100000
+
+# 重複を記録しない
+setopt hist_ignore_dups
+
+# 開始と終了を記録
+setopt EXTENDED_HISTORY
+
+# tmux 起動
+# @see https://qiita.com/ssh0/items/a9956a74bff8254a606a
+if [[ ! -n $TMUX && $- == *l* ]]; then
+  # get the IDs
+  ID="`tmux ls`"
+  if [[ -z "$ID" ]]; then
+    tmux new-session
+  fi
+  create_new_session="Create New Session"
+  ID="$ID\n${create_new_session}:"
+  ID="`echo $ID | fzf | cut -d: -f1`"
+  if [[ "$ID" = "${create_new_session}" ]]; then
+    tmux new-session
+  elif [[ -n "$ID" ]]; then
+    tmux attach-session -t "$ID"
+  else
+    :  # Start terminal normally
+  fi
+fi
+
+# fzf 設定のロード
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
