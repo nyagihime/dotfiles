@@ -10,7 +10,7 @@
 # ---------------------------------------------------------                                             
 # bootmux is tmux launcher with session manager
 # original script:
-#   bootmux by @arks22 https://github.com/arks22/bootmux
+#   tmuximum by @arks22 https://github.com/arks22/tmuximum
 # logo ascii art by Text to ASCII Art Generator (TAAG)
 #   Font Name: Slant
 #   @link http://patorjk.com/software/taag/#p=display&f=Slant&t=bootmux
@@ -124,8 +124,8 @@ function set-filter() {
   while [[ -n $filters ]]; do
   filter=${filters%%:*}
     if type "$filter" >/dev/null 2>&1; then
-      [[ "$filter" = "fzf" ]] && filter=($filter --ansi --prompt=mode\?\ \>)
-      [[ "$filter" = "fzf-tmux" ]] && filter=($filter -r --ansi --prompt=mode\?\ \>)
+      [[ "$filter" = "fzf" ]] && filter=($filter --ansi --prompt=bootmux\ \>)
+      [[ "$filter" = "fzf-tmux" ]] && filter=($filter -r --ansi --prompt=bootmux\ \>)
       return 0
     else
       filters="${filters#*:}"
