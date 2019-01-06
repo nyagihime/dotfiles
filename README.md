@@ -1,6 +1,6 @@
 # dotfiles
 
-My dotfiles management repository.
+黒い画面の環境をまとめて管理するためのリポジトリ
 
 ## install
 
@@ -14,7 +14,8 @@ ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
 
 ## TODO
 
-- [ ] Install script (ex; setup.sh)
+- [ ] Install script (ex; setup.sh or Makefile)
 - [ ] support .gitconfig
 - [ ] support .bashrc
 - [ ] support .vimrc
+- [ ] セッション閉じたときも番号を詰められるか調べる
