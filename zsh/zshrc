@@ -16,14 +16,17 @@ function tabname {
 # 重複パスを登録しない
 typeset -U path cdpath fpath manpath
 
+# ------------------------------------------------
 # パスを通す
+# ------------------------------------------------
+# GoLang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+# anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 export PATH="$HOME/.anyenv/envs/ndenv/shims:$PATH"
 eval "$(anyenv init -)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/yanagimachi/.sdkman"
-[[ -s "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh"
 
 
 # nyae? 有効化
@@ -100,7 +103,6 @@ if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
 fi
 
 
-
 # export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 # export PATH="$HOME/.anyenv/bin:$PATH"
 # eval "$(anyenv init -)"
@@ -133,3 +135,8 @@ alias bootmux='$HOME/dotfiles/bin/bootmux'
 
 # fzf 設定のロード
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# なんか最後にしろというから最後に移した。
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/yanagimachi/.sdkman"
+[[ -s "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh"
