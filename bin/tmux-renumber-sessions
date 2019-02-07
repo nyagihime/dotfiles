@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# tmux でセッションを閉じるとセッション番号が歯抜けになるのを何とかする
+# 自分でセッション名をつけている場合はスキップされてデフォルト（というか数字のみ）の
+# セッション名のみリネームされる
+# @see https://endaaman.me/tips/tmux-renumber-session
+
+# 現在のセッション一覧から頭のセッション番号だけを取り出す
+sessions=$(tmux ls | grep -E '^[0-9]*:' | cut -f1 -d':' | sort)
+
+# 新しい起点の番号
+new_sid=0
+
+# ループでまわしてリネームしてまわる
+# tmux rename -t でセッション名をリネーム
+for old in $sessions
+do
+  tmux rename -t $old $new_sid
+  ((new_sid++))
+done
