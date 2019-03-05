@@ -7,6 +7,7 @@ bindkey -e
 
 # エイリアス登録
 alias ll='ls -la'
+alias docker-kill-all='docker kill $(docker ps -q)'
 
 # カスタム関数登録
 function tabname {
@@ -26,6 +27,9 @@ export PATH=$PATH:$GOPATH/bin
 export PATH="$HOME/.anyenv/bin:$PATH"
 export PATH="$HOME/.anyenv/envs/ndenv/shims:$PATH"
 eval "$(anyenv init -)"
+
+export NODE_PATH="$HOME/.anyenv/envs/ndenv/shims"
+
 # Graphviz
 export GRAPHVIZ_DOT=/usr/local/bin/dot
 
@@ -137,7 +141,17 @@ alias bootmux='$HOME/dotfiles/bin/bootmux'
 # fzf 設定のロード
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# caniuse-cli の Tab補完に対応
+# @see https://www.npmjs.com/package/caniuse-cli
+. <(caniuse --completion)
+
 # なんか最後にしろというから最後に移した。
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/yanagimachi/.sdkman"
 [[ -s "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/yanagimachi/.sdkman/bin/sdkman-init.sh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yanagimachi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yanagimachi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yanagimachi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yanagimachi/google-cloud-sdk/completion.zsh.inc'; fi
