@@ -1,0 +1,32 @@
+#!/bin/bash
+
+
+function fzg::branches() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+
+function fzg::available-commands() {
+  answer=$(fzg::available-commands:list | fzf)
+
+  case $answer in
+    "branch" ) fzg::branches
+  esac
+}
+
+function fzg::available-commands:list() {
+  echo -e "branch"
+}
+
+function main() {
+
+  # 引数が０のときの処理
+  if [[ $# -eq 0 ]]; then
+    fzg::available-commands
+  fi
+}
+
+main $@

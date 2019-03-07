@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if battery_info=$(/usr/bin/pmset -g ps | awk '{ if (NR == 2) print $3 " " $4 }' | sed -e "s/;//g" -e "s/%//") ; then
+
+  battery_quantity=$(echo $battery_info | awk '{print $1}')
+  battery_status=$(echo $battery_info | awk '{print $2}')
+
+  if [ $battery_status != "discharging" ]; then
+    print_prefix="#[fg=green] 🔌"
+  elif (( $battery_quantity < 16 )); then
+    print_prefix="#[bg=red,fg=white] 🔋"
+  else
+    print_prefix="#[fg=green] 🔋"
+  fi
+
+  echo "${print_prefix} ${battery_quantity}% #[default]"
+fi

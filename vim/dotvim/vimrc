@@ -1,0 +1,35 @@
+"シンタックスハイライト
+syntax on
+
+"行番号表示（set relativenumber と組み合わせると現在地の行番号が０じゃなくなる
+set number
+
+"行番号を相対表示にする
+set relativenumber
+
+"Vim でクリップボードを使えるようにする
+set clipboard=unnamed,autoselect
+
+"Vim で deleteとかBSが効かないのをなんとかする
+set backspace=indent,eol,start
+
+":bコマンドでバッファを切り替えるときに編集中のファイルを保存しないでも良くする設定
+set hidden
+
+"vim-plug （プラグインマネージャ）関連
+" begin() と end() の間に使いたいプラグインを入れる
+call plug#begin()
+Plug 'jceb/vim-orgmode'
+Plug 'vim-scripts/utl.vim'
+Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/taglist.vim'
+Plug 'szw/vim-tags'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-speeddating'
+Plug 'chrisbra/NrrwRgn'
+Plug 'tpope/vim-pathogen'
+Plug 'itchyny/calendar.vim'
+Plug 'vim-scripts/SyntaxRange'
+
+call plug#end()
+
