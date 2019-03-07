@@ -1,0 +1,29 @@
+#!/bin/sh
+cd `tmux display-message -p -F "#{pane_current_path}"`
+branch_name=`git branch | grep \*.* | sed -e 's/\*\ //'`
+user_name=`git config --get user.name`
+email_address=`git config --get user.email`
+
+
+if [ $1 = "--name-only" ]; then
+  vcs_usr="${user_name}"
+elif [ $1 = "--mail-only" ]; then
+  vcs_usr="${email_address}"
+else
+  vcs_usr="${user_name} | ${email_address}"
+fi
+
+
+
+
+
+
+
+
+if [ ! -z ${branch_name} ]; then
+  echo "b:#[fg=green]${branch_name}"\
+       "#[default]|"\
+       "u:#[fg=yellow]${vcs_usr}"
+else
+  echo "not a repository"
+fi
