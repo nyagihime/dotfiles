@@ -4,7 +4,6 @@ branch_name=`git branch | grep \*.* | sed -e 's/\*\ //'`
 user_name=`git config --get user.name`
 email_address=`git config --get user.email`
 
-
 if [ $1 = "--name-only" ]; then
   vcs_usr="${user_name}"
 elif [ $1 = "--mail-only" ]; then
@@ -13,16 +12,18 @@ else
   vcs_usr="${user_name} | ${email_address}"
 fi
 
-
-
-
-
-
-
-
 if [ ! -z ${branch_name} ]; then
-  echo "b:#[fg=green]${branch_name}"\
-       "#[default]|"\
+
+  # ブランチ名で色分け（とりあえずよく使う master / develop は専用カラーをあててみた）
+  # TODO: remote と同期してるかとか、modified があるかとかでも色分けしたい
+  case ${branch_name} in
+    "master" ) branch_disp="#[fg=red]${branch_name}";;
+    "develop" ) branch_disp="#[fg=green]${branch_name}";;
+    * ) branch_disp="#[fg=cyan]${branch_name}";;
+  esac
+
+  echo "b:${branch_disp}#[default]"\
+       "|"\
        "u:#[fg=yellow]${vcs_usr}"
 else
   echo "not a repository"
