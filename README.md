@@ -19,8 +19,6 @@ Vim プラグインインストール
 
 vim 起動 → `:PlugInstall`
 
-
-
 ## TODO
 
 - [ ] Install script (ex; setup.sh or Makefile)
