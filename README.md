@@ -11,6 +11,7 @@ ln -s $(pwd)/zsh/zshrc ~/.zshrc
 ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
 ln -s $(pwd)/dotvim/ ~/.vim
 ln -s $(pwd)/vimrc ~/.vimrc
+git config --global commit.template $(pwd)/git/commit_template
 
 ...
 ```
