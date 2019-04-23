@@ -6,8 +6,22 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 
 # エイリアス登録
+# ----- 表示系
 alias ll='ls -la'
+alias ls='ls -G'
+alias cl='clear'
+alias .r='source ~/.zshrc'
+
+# ----- 移動系
+alias ..='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+
+# ----- その他
 alias docker-kill-all='docker kill $(docker ps -q)'
+alias todo='$HOME/dotfiles/bin/todoclist'
+alias dotfiles='$HOME/dotfiles'
+
 
 # カスタム関数登録
 function tabname {
