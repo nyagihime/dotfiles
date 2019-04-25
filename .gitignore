@@ -1,2 +1,4 @@
 .idea/
+# 各種プラグインのディレクトリは除外
 vim/dotvim/plugged
+tmux/plugins
