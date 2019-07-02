@@ -22,9 +22,11 @@ if [ ! -z ${branch_name} ]; then
     * ) branch_disp="#[fg=cyan]${branch_name}";;
   esac
 
-  echo "b:${branch_disp}#[default]"\
+  echo "Git["\
+       "b:${branch_disp}#[default]"\
        "|"\
-       "u:#[fg=yellow]${vcs_usr}"
-else
-  echo "not a repository"
+       "u:#[fg=yellow]${vcs_usr}"\
+       "]"
+# else
+#   echo "not a repository"
 fi
