@@ -124,8 +124,8 @@ fi
 
 
 # export PATH="$HOME/Library/Python/2.7/bin:$PATH"
-# export PATH="$HOME/.anyenv/bin:$PATH"
-# eval "$(anyenv init -)"
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
 
 
 # history関連
@@ -134,7 +134,7 @@ fi
 export HISTFILE=${HOME}/.zsh_history
 
 # メモリに保存される履歴の件数
-export HISTSIZE=1000
+export HISTSIZE=10000
 
 # 履歴ファイルに保存される履歴の件数
 export SAVEHIST=100000
