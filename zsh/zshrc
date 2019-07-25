@@ -21,7 +21,7 @@ alias ..3='cd ../../..'
 alias docker-kill-all='docker kill $(docker ps -q)'
 alias todo='$HOME/dotfiles/bin/todoclist'
 alias dotfiles='$HOME/dotfiles'
-
+alias reload-shell='exec $SHELL -l'
 
 # カスタム関数登録
 function tabname {
