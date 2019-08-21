@@ -48,6 +48,9 @@ export NODE_PATH="$HOME/.anyenv/envs/ndenv/shims"
 # Graphviz
 export GRAPHVIZ_DOT=/usr/local/bin/dot
 
+# ICU4C
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 
 # nyae? 有効化
 setopt correct
