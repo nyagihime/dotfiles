@@ -8,6 +8,7 @@
 - zsh
 - vim
 - Alacritty
+- Hyper
 
 ## install
 
@@ -22,6 +23,8 @@ ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
 ln -s $(pwd)/vim/dotvim/ ~/.vim
 ln -s $(pwd)/vim/vimrc ~/.vimrc
 ln -s $(pwd)/alacritty ~/.config/alacritty/alacritty.yaml
+ln -s $(pwd)/hyper/hyper.js ~/.hyper.js
+ln -s $(pwd)/hyper/hyper_plugins ~/.hyper_plugins
 git config --global commit.template $(pwd)/git/commit_template
 
 ...
