@@ -4,12 +4,21 @@ branch_name=`git branch | grep \*.* | sed -e 's/\*\ //'`
 user_name=`git config --get user.name`
 email_address=`git config --get user.email`
 
+# ユーザー名、メールアドレスが一定文字以上ならトリムする
+if test ${#user_name} -gt 5; then
+  user_name=${user_name::5}..
+fi
+
+if test ${#email_address} -gt 3; then
+  email_address=${email_address::3}..
+fi
+
 if [ $1 = "--name-only" ]; then
-  vcs_usr="${user_name}"
+  vcs_usr=" ${user_name}"
 elif [ $1 = "--mail-only" ]; then
   vcs_usr="${email_address}"
 else
-  vcs_usr="${user_name} | ${email_address}"
+  vcs_usr="${user_name}[${email_address}]"
 fi
 
 if [ ! -z ${branch_name} ]; then
@@ -19,14 +28,17 @@ if [ ! -z ${branch_name} ]; then
   case ${branch_name} in
     "master" ) branch_disp="#[fg=red]${branch_name}";;
     "develop" ) branch_disp="#[fg=green]${branch_name}";;
-    * ) branch_disp="#[fg=cyan]${branch_name}";;
+    * )
+    if test ${#branch_name} -gt 6; then
+      branch_name=${branch_name::6}..
+    fi
+    branch_disp="#[fg=colour75]${branch_name}";;
   esac
 
-  echo "Git["\
-       "b:${branch_disp}#[default]"\
-       "|"\
-       "u:#[fg=yellow]${vcs_usr}"\
-       "]"
+  echo "#[bg=colour240 fg=colour232] "\
+       "#[fg=yellow] :${branch_disp}"\
+       "#[fg=yellow] :${vcs_usr}"\
+       "#[default]"
 # else
 #   echo "not a repository"
 fi

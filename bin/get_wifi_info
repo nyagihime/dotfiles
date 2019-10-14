@@ -12,17 +12,26 @@ if air_info=($(eval "$airport_path" -I | grep -E "^ *(agrCtlRSSI|state|SSID):" |
   case "$state" in
     "running" )
       # signals=(▁ ▂ ▄ ▆ █)
-      signals=(=---- ==--- ===-- ====- ======)
+      # signals=(=---- ==--- ===-- ====- ======)
+      signals=(1 2 3 4 5)
+      # signals=(󿢣 󿢦 󿢩 󿢬 󿢯)
       # signal=""
       rssi_=$(expr 5 - ${rssi} / -20)
       # for ((i=0; i < $rssi_; i++ )); do
       #  signal="${signal}${signals[$i]}"
       # done
 
-      airport_="${ssid} | ${signals[$rssi_]}"
+      if [ $1 = "--lv-only" ]; then
+        _airport="󿪨  ${signals[$rssi_]}"
+      else
+        _airport="󿪨  ${signals[$rssi_]} (${ssid::3}**)"
+      fi
+
     ;;
-    "init"    ) airport_="#[fg=yellow] ... " ;;
-    *         ) airport_="#[fg=red] ✘  " ;;
+    "init"    ) _airport="#[fg=yellow] 󿪩 " ;;
+    *         ) _airport="#[fg=red] 󿪩  " ;;
   esac
-  echo "${airport_}#[default]"
+
+  echo "#[bg=colour245 fg=colour240] "\
+  "#[fg=colour255]${_airport}#[default]"
 fi
