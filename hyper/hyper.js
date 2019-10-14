@@ -9,10 +9,10 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 22,
+    fontSize: 18,
 
     // font family with optional fallbacks
-    fontFamily: '"Cica", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"SF Mono Square", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
@@ -27,7 +27,7 @@ module.exports = {
     letterSpacing: 0,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(255,193,7,0.7)',
+    cursorColor: 'rgba(255,193,7,0.75)',
 
     // terminal text color under BLOCK cursor
     cursorAccentColor: '#000',
@@ -43,7 +43,7 @@ module.exports = {
 
     // terminal background color
     // opacity is only supported on macOS
-    backgroundColor: 'rgba(30,30,30,0.8)',
+    backgroundColor: 'rgba(30,30,30,0.9)',
 
     // terminal selection color
     selectionColor: 'rgba(248,28,229,0.3)',
@@ -67,7 +67,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '2px',
+    padding: '1px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide

@@ -2,13 +2,27 @@
 
 黒い画面の環境をまとめて管理するためのリポジトリ
 
-> アイコンフォントを使ってるので、Cica をインストールし、ターミナルのフォントとして指定しておく事！
-> また、各 dotfiles を編集する場合も Cica をインストールした環境で行わないとグリフが見えません。
+## with Symbol Fonts
 
- ←が見えていればOK。豆腐になる場合はインストールされていません。
+- Version2より、アイコンフォントを使用するように変更。
+- SF Mono Square に最適化して設定ファイルをすべて書き直し。
 
-[miiton/Cica](https://github.com/miiton/Cica)
-[Cicaに含まれるPUAのグリフ一覧](https://miiton.github.io/Cica/)
+よって、tmux を起動するターミナルはフォントに SF Mono Square をインストールしておく必要あり。
+また同時に、設定を編集するエディタも SF Mono Square をインストールしておく必要あり。
+
+### フォントテスト
+
+エディタでこの README.md を開いて次の行を確認。
+ ←が見えていればOK。
+
+### フォントインストールと、Glyphの確認
+
+[delphinus/homebrew-sfmono-square](https://github.com/delphinus/homebrew-sfmono-square)
+アイコンフォントは NerdFont ベースなので、ここで探すのが良い
+[Cheat Sheet](https://www.nerdfonts.com/cheat-sheet)
+
+もととなったフォントの略称がクラス名にはいっているっぽいので、それをもとにある程度当たりをつけられる。
+たとえば、PowerLine 系のシンボルなら `nf-ple` といれると多分見つかる（PLE：PowerLine Extra symbols）
 
 ## 対応リスト
 

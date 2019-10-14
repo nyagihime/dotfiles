@@ -22,14 +22,14 @@ if air_info=($(eval "$airport_path" -I | grep -E "^ *(agrCtlRSSI|state|SSID):" |
       # done
 
       if [ $1 = "--lv-only" ]; then
-        _airport="󿪨  ${signals[$rssi_]}"
+        _airport="  ${signals[$rssi_]}"
       else
-        _airport="󿪨  ${signals[$rssi_]} (${ssid::3}**)"
+        _airport="  ${signals[$rssi_]} (${ssid::3}**)"
       fi
 
     ;;
-    "init"    ) _airport="#[fg=yellow] 󿪩 " ;;
-    *         ) _airport="#[fg=red] 󿪩  " ;;
+    "init"    ) _airport="#[fg=yellow]  " ;;
+    *         ) _airport="#[fg=red]   " ;;
   esac
 
   echo "#[bg=colour245 fg=colour240] "\
