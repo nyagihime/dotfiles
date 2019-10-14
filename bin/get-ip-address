@@ -1,0 +1,30 @@
+#!/bin/sh
+
+local_ip=$(ifconfig en0 inet | sed -e '1d' -e 's/^.*inet //' -e 's/ netmask.*$//')
+global_ip=$(curl -s inet-ip.info)
+
+help_message="GET LOCAL IP usage: nget-local-ip [option]"\
+"\nOPTIONS"\
+"\n-------------------------------------------------"\
+"\n--global show global ip address"\
+"\n--local  show local ip address"\
+"\n--both   show global and local ip address"\
+"\n-------------------------------------------------"\
+"\nlocal: ${local_ip} / global: ${global_ip}"
+
+if [ ${1:-0} = 0 ]; then
+  echo ${help_message}
+else
+  if [ $1 = "--global" ]; then
+    echo ${global_ip}
+  elif [ $1 = "--local" ]; then
+    echo ${local_ip}
+  elif [ $1 = "--both" ]; then
+    echo "local: ${local_ip} / global: ${global_ip}"
+  else
+    echo "bad option"
+    echo "-------------------------------------------------"
+    echo ${help_message}
+  fi
+fi
+
