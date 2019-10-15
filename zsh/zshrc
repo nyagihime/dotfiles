@@ -31,6 +31,11 @@ function tabname {
     echo -ne "\033]0;"$*"\007"
 }
 
+# 色名でプロンプトの色を変えられるように
+autoload -Uz colors # black red green yellow blue magenta cyan white
+colors
+
+
 # 重複パスを登録しない
 typeset -U path cdpath fpath manpath
 
@@ -62,10 +67,6 @@ setopt correct
 # export ZPLUG_HOME=/usr/local/opt/zplug
 # source $ZPLUG_HOME/init.zsh
 
-# 色名でプロンプトの色を変えられるように
-autoload -Uz colors # black red green yellow blue magenta cyan white
-colors
-
 # ------------------------------------------------
 # 入力補完関連
 # ------------------------------------------------
@@ -88,7 +89,7 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}=
 # ------------------------------------------------
 # （左）
 # PROMPT="%F{036}[%n@%m]%{$reset_color%} @ %{${fg[blue]}%}[%(3~,%-1~/.../%1~,%~)]%{${reset_color}%}"
-PROMPT="%F{blue}(ﾉ-_-)ﾉ ~┻━┻･..｡;･'%{$reset_color%} @ %{${fg[cyan]}%}[%(3~,%-1~/.../%1~,%~)]%{${reset_color}%}"
+PROMPT="%F{yellow}(ﾉ-_-)ﾉ ~┻━┻･..｡;･'%{$reset_color%} @ %{${fg[cyan]}%}[%(3~,%-1~/.../%1~,%~)]%{${reset_color}%}"
 
 autoload -Uz vcs_info
 setopt prompt_subst
@@ -133,6 +134,30 @@ fi
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
+# tmux 経由でタイトルを更新できるようにする
+# ------------------------------------------------
+# Override auto-title when static titles are desired ($ title My new title)
+title() { export TITLE_OVERRIDDEN=1; echo -en "\e]0;$*\a"}
+# Turn off static titles ($ autotitle)
+autotitle() { export TITLE_OVERRIDDEN=0 }; autotitle
+# Condition checking if title is overridden
+overridden() { [[ $TITLE_OVERRIDDEN == 1 ]]; }
+# Echo asterisk if git state is dirty
+gitDirty() { [[ $(git status 2> /dev/null | grep -o '\w\+' | tail -n1) != ("clean"|"") ]] && echo "*" }
+
+# Show cwd when shell prompts for input.
+precmd() {
+   if overridden; then return; fi
+   cwd=${$(pwd)##*/} # Extract current working dir only
+   print -Pn "\e]0;$cwd$(gitDirty)\a" # Replace with $pwd to show full path
+}
+
+# Prepend command (w/o arguments) to cwd while waiting for command to complete.
+preexec() {
+   if overridden; then return; fi
+   printf "\033]0;%s\a" "${1%% *} | $cwd$(gitDirty)" # Omit construct from $1 to show args
+}
+# // ---------------------------------------------
 
 # history関連
 # ------------------------------------------------
