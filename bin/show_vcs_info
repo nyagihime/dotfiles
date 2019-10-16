@@ -39,6 +39,8 @@ if [ ! -z ${branch_name} ]; then
        "#[fg=yellow] :${branch_disp}"\
        "#[fg=yellow] :${vcs_usr}"\
        "#[default]"
-# else
-#   echo "not a repository"
+else
+  echo "#[bg=colour240 fg=colour232] "\
+       "#[fg=colour245] "\
+       "#[default]"
 fi
