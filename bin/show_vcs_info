@@ -35,7 +35,7 @@ if [ ! -z ${branch_name} ]; then
     branch_disp="#[fg=colour75]${branch_name}";;
   esac
 
-  echo "#[bg=colour240 fg=colour232] "\
+  echo "#[bg=colour240 fg=colour236] "\
        "#[fg=yellow] :${branch_disp}"\
        "#[fg=yellow] :${vcs_usr}"\
        "#[default]"

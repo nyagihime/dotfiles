@@ -1,6 +1,13 @@
 # Language (一部のターミナルエミュが日本語を出せない問題対策)
 export LANG=ja_JP.UTF-8
 
+# ロケール設定
+# LANGで基本設定を ja_JP に変更した上で英語表記にしておきたい部分を en_US で上書き
+# @see https://qiita.com/aosho235/items/58e2e7acd5c2ee3641ff
+# @see https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB
+export LC_MESSAGES=en_US.UTF-8
+export LC_TIME=en_US.UTF-8
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
