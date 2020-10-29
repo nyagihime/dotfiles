@@ -5,8 +5,8 @@ user_name=`git config --get user.name`
 email_address=`git config --get user.email`
 
 # ユーザー名、メールアドレスが一定文字以上ならトリムする
-if test ${#user_name} -gt 5; then
-  user_name=${user_name::5}..
+if test ${#user_name} -gt 4; then
+  user_name=${user_name::4}..
 fi
 
 if test ${#email_address} -gt 3; then
@@ -25,18 +25,23 @@ if [ ! -z ${branch_name} ]; then
 
   # ブランチ名で色分け（とりあえずよく使う master / develop は専用カラーをあててみた）
   # TODO: remote と同期してるかとか、modified があるかとかでも色分けしたい
+
+  # ブランチ名が一定以上の長さなら詰める
+  if test ${#branch_name} -gt 3; then
+      branch_disp=${branch_name::3}..
+  else
+      branch_disp=${branch_name}
+  fi
+
   case ${branch_name} in
-    "master" ) branch_disp="#[fg=red]${branch_name}";;
-    "develop" ) branch_disp="#[fg=green]${branch_name}";;
+    "master" ) display_branch_name="#[fg=red]${branch_disp}";;
+    "develop" ) display_branch_name="#[fg=green]${branch_disp}";;
     * )
-    if test ${#branch_name} -gt 6; then
-      branch_name=${branch_name::6}..
-    fi
-    branch_disp="#[fg=colour75]${branch_name}";;
+    display_branch_name="#[fg=colour75]${branch_disp}";;
   esac
 
   echo "#[bg=colour240 fg=colour236] "\
-       "#[fg=yellow] :${branch_disp}"\
+       "#[fg=yellow] :${display_branch_name}"\
        "#[fg=yellow] :${vcs_usr}"\
        "#[default]"
 else
