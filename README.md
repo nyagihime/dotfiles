@@ -48,13 +48,59 @@ ln -s $(pwd)/alacritty ~/.config/alacritty/alacritty.yaml
 ln -s $(pwd)/hyper/hyper.js ~/.hyper.js
 ln -s $(pwd)/hyper/hyper_plugins ~/.hyper_plugins
 git config --global commit.template $(pwd)/git/commit_template
-
 ...
 ```
 
 Vim プラグインインストール
 
 vim 起動 → `:PlugInstall`
+
+## Zinit
+
+zsh のプラグイン管理は [Zinit](https://github.com/zdharma/zinit) に変更した。
+自動インストールでも良いが、.zshrcの書き換えとかもあるので手動でやっている。
+
+### インストール
+
+```zsh
+cd
+mkdir .zinit
+git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+```
+
+### 有効化
+
+> compinit 関連より前に書く。下に書く場合は、ドキュメントのインストール手順に従う。
+
+```zshrc
+source $HOME/.zinit/bin/zinit.zsh
+```
+
+次からは自動インストールを使っても良い気がしてきた。
+
+とりあえずインストールしているプラグインをここに挙げておく。
+
+> zsh-users/zsh-completions を使う場合は、`zplugin ice blockf` しておくと動作が高速になるらしい
+> @see [https://blog.katio.net/page/zplugin](https://blog.katio.net/page/zplugin)
+
+- zsh-users/zsh-completions
+- zsh-users/zsh-autosuggestions
+- zdharma/fast-syntax-highlighting
+
+プラグインのインストール方法 `zinit light ${plugin-name}`
+使わなくなったら `zinit unload ${plugin-name}`
+
+zplug のプラグインとかもこれでインストールできる
+
+```zsh
+zinit light zsh-users/zsh-autosuggestions
+```
+
+Zinit 自体のアップデート
+
+```bash
+zinit self-update
+```
 
 ## TODO
 
