@@ -48,6 +48,7 @@ ln -s $(pwd)/alacritty ~/.config/alacritty/alacritty.yaml
 ln -s $(pwd)/hyper/hyper.js ~/.hyper.js
 ln -s $(pwd)/hyper/hyper_plugins ~/.hyper_plugins
 git config --global commit.template $(pwd)/git/commit_template
+git config --global core.excludesfile $(pwd)/git/gitignore_global
 ...
 ```
 
