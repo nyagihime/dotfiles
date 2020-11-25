@@ -1,234 +1,18 @@
+# zprof によるプロファイリングの実行
+# 未使用時はコメントアウトしておく
+# zmodload zsh/zprof && zprof
+
 # dotfiles までのパス
 export DOTFILES=$HOME/dotfiles
 
-# Language (一部のターミナルエミュが日本語を出せない問題対策)
-export LANG=ja_JP.UTF-8
-export LC_TYPE=ja_JP.UTF-8
-
-# ロケール設定
-# LANGで基本設定を ja_JP に変更した上で英語表記にしておきたい部分を en_US で上書き
-# @see https://qiita.com/aosho235/items/58e2e7acd5c2ee3641ff
-# @see https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB
-export LC_MESSAGES=en_US.UTF-8
-export LC_TIME=en_US.UTF-8
-
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-
-# エイリアス登録
-# ----- 表示系
-alias ll='ls -la'
-alias ls='ls -G'
-alias cl='clear'
-alias .r='source ~/.zshrc'
-
-# ----- 移動系
-alias ..='cd ..'
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
-
-# ----- その他
-alias docker-kill-all='docker kill $(docker ps -q)'
-alias todo='$DOTFILES/bin/todoclist'
-alias dotfiles='$DOTFILES'
-alias reload-shell='exec $SHELL -l'
-alias ndenv='nodenv'
-
-# カスタム関数登録
-function tabname {
-    echo -ne "\033]0;"$*"\007"
-}
-
-# 色名でプロンプトの色を変えられるように
-autoload -Uz colors # black red green yellow blue magenta cyan white
-colors
-
-# 重複パスを登録しない
-typeset -U path cdpath fpath manpath
-
-# nyae? 有効化
-setopt correct
-
-# ------------------------------------------------
-# LS 時の配色（LS_COLORS）
-# ------------------------------------------------
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-
-# zplug 有効化
-# export ZPLUG_HOME=/usr/local/opt/zplug
-# source $ZPLUG_HOME/init.zsh
-# ------------------------------------------------
-# Zinit (zplug の代わり)
-# ------------------------------------------------
-source $HOME/.zinit/bin/zinit.zsh
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# プラグインの有効化
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma/fast-syntax-highlighting
-zinit light g-plane/zsh-yarn-autocompletions
-
-# ------------------------------------------------
-# 入力補完関連
-# ------------------------------------------------
-# 補完候補をカーソルで選択できるようにする
-autoload -U compinit
-compinit -u
-zstyle ':completion:*:default' menu select=1
-
-# tab 補完で大文字小文字を区別しない
-zstyle ':completion:' matcher-list 'm:{a-z}={A-Z}'
-
-# わざわざ大文字を入力した時は小文字の候補を補完しない
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
-
-# でもやっぱり大文字の候補が見つからない場合には, 小文字の候補を補完する
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
-
-
-# プロンプトいじる
-# ------------------------------------------------
-# （左）
-# PROMPT="%F{036}[%n@%m]%{$reset_color%} @ %{${fg[blue]}%}[%(3~,%-1~/.../%1~,%~)]%{${reset_color}%}"
-# PROMPT="%F{yellow}(ﾉ-_-)ﾉ ~┻━┻･..｡;･'%{$reset_color%} @ %{${fg[cyan]}%}[%(3~,%-1~/.../%1~,%~)]%{${reset_color}%}"
-PROMPT="%F{034} : %(1~,%1~,%~)${reset_color}"
-
-autoload -Uz vcs_info
-setopt prompt_subst
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
-# PROMPT=$PROMPT"${vcs_info_msg_0_}"
-
-case ${USERNAME} in
-'root')
-PROMPT=$PROMPT"
-%F{red}❯ ${reset_color}"
-		;;
-*)
-PROMPT=$PROMPT"
-%F{red}❯ ${reset_color}"
-		;;
-esac
-
-# （右）今は使ってない
-# RPROMPT=''
-
-
-# anyenv 関係（起動が遅いのは多分これのせい）
-# 毎回 rehash が走るのか起動が遅くなるので --no-rehash する。（必要なら自分でrehash するし）
-if [ -d $HOME/.anyenv ] ; then
-	export PATH="$HOME/.anyenv/bin:$PATH"
-	eval "$(anyenv init - --no-rehash)"
-fi
-
-# .zshrc をコンパイル。
-# .zshrc に変更があればまた自動コンパイル
-if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
-  zcompile ~/.zshrc
-fi
-
-# tmux 経由でタイトルを更新できるようにする
-# ------------------------------------------------
-# Override auto-title when static titles are desired ($ title My new title)
-title() { export TITLE_OVERRIDDEN=1; echo -en "\e]0;$*\a"}
-# Turn off static titles ($ autotitle)
-autotitle() { export TITLE_OVERRIDDEN=0 }; autotitle
-# Condition checking if title is overridden
-overridden() { [[ $TITLE_OVERRIDDEN == 1 ]]; }
-# Echo asterisk if git state is dirty
-gitDirty() { [[ $(git status 2> /dev/null | grep -o '\w\+' | tail -n1) != ("clean"|"") ]] && echo "*" }
-
-# Show cwd when shell prompts for input.
-precmd() {
-   if overridden; then return; fi
-   cwd=${$(pwd)##*/} # Extract current working dir only
-   print -Pn "\e]0;$cwd$(gitDirty)\a" # Replace with $pwd to show full path
-}
-
-# Prepend command (w/o arguments) to cwd while waiting for command to complete.
-preexec() {
-   if overridden; then return; fi
-   printf "\033]0;%s\a" "${1%% *} | $cwd$(gitDirty)" # Omit construct from $1 to show args
-}
-# ---------------------------------------------
-
-# history関連
-# ------------------------------------------------
-# 履歴ファイルの保存先
-export HISTFILE=${HOME}/.zsh_history
-
-# メモリに保存される履歴の件数
-export HISTSIZE=10000
-
-# 履歴ファイルに保存される履歴の件数
-export SAVEHIST=100000
-
-# 重複を記録しない
-setopt hist_ignore_dups
-
-# 開始と終了を記録
-setopt EXTENDED_HISTORY
-
-# tmux 起動
-# @see https://qiita.com/ssh0/items/a9956a74bff8254a606a
-if [[ ! -n $TMUX ]]; then
-  $DOTFILES/bin/bootmux
-fi
-
-alias bootmux='$DOTFILES/bin/bootmux'
-
-# fzf 設定のロード
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# caniuse-cli の Tab補完に対応
-# @see https://www.npmjs.com/package/caniuse-cli
-. <(caniuse --completion)
-
-# ------------------------------------------------
-# パスを通す
-# ------------------------------------------------
-# export PATH="$HOME/Library/Python/2.7/bin:$PATH"
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
-
-# GoLang
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-# anyenv
-export ANYENV_ROOT=$HOME/.anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-export PATH="$HOME/.anyenv/envs/ndenv/shims:$PATH"
-eval "$(anyenv init -)"
-
-export NODE_PATH="$HOME/.anyenv/envs/ndenv/shims"
-
-# Graphviz
-export GRAPHVIZ_DOT=/usr/local/bin/dot
-
-# python / tkinter
-export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"
-export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"
-export PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig"
-export PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6' --enable-shared"
-if command -v pyenv 1>/dev/null 2>&1; then
- eval "$(pyenv init -)"
-fi
-
-# ICU4C
-export PATH="/usr/local/opt/icu4c/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+source $DOTFILES/zsh/zsh.d/00001-base.zsh
+source $DOTFILES/zsh/zsh.d/00002-anyenv.zsh
+source $DOTFILES/zsh/zsh.d/00100-aliases.zsh
+source $DOTFILES/zsh/zsh.d/00200-colors.zsh
+source $DOTFILES/zsh/zsh.d/00300-prompt.zsh
+source $DOTFILES/zsh/zsh.d/00400-zplug.zsh
+source $DOTFILES/zsh/zsh.d/00410-tmux.zsh
+source $DOTFILES/zsh/zsh.d/00500-path.zsh
 
 # なんか最後にしろというから最後に移した。
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -241,3 +25,9 @@ if [ -f '/Users/yanagimachi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yan
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/yanagimachi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yanagimachi/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/usr/local/opt/bison/bin:$PATH"
+
+# zprof の結果を表示
+# 未使用時は何も起きないのでこっちは放置でOK
+if (which zprof > /dev/null) ;then
+  zprof | fzf
+fi
