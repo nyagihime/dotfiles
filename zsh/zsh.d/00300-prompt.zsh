@@ -38,8 +38,8 @@ esac
 # 入力補完関連
 # ------------------------------------------------
 # 補完候補をカーソルで選択できるようにする
-autoload -U compinit
-# 起動プロセスの中で１回呼べばOK。プラグインとかで呼んでたりするならここではスルーできる
+# ※ compinit は起動プロセスの中で１回呼べばOK。プラグインとかで呼んでたりするならここではスルーできる
+# autoload -U compinit
 # compinit -u
 zstyle ':completion:*:default' menu select=1
 
