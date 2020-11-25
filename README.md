@@ -87,6 +87,7 @@ source $HOME/.zinit/bin/zinit.zsh
 - zsh-users/zsh-completions
 - zsh-users/zsh-autosuggestions
 - zdharma/fast-syntax-highlighting
+- g-plane/zsh-yarn-autocompletions
 
 プラグインのインストール方法 `zinit light ${plugin-name}`
 使わなくなったら `zinit unload ${plugin-name}`
