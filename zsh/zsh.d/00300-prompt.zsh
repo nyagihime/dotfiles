@@ -28,12 +28,57 @@ zstyle ':vcs_info:git:*' stagedstr "%F{yellow} "
 zstyle ':vcs_info:git:*' unstagedstr "%F{red} "
 
 # $vcs_info_msg_0_ の書式設定
-zstyle ':vcs_info:*' formats "%F{026}[ %b]%c%u%f"
+zstyle ':vcs_info:*' formats "%F{026}[ %b]%c%u %m%f"
 
 # コンフリクトやマージ中など、特殊な状況のときは
 # formats の代わりにこちらが表示される。
 # %a でアクション名が展開される（actionformats でのみ使える）
 zstyle ':vcs_info:*' actionformats '(%a)[ %b]'
+
+# vcs_info フック関連
+# formats / actionformats のメッセージが展開される直前にフック
+# @see https://qiita.com/mollifier/items/8d5a627d773758dd8078
+# @see https://sourceforge.net/p/zsh/code/ci/master/tree/Misc/vcs_info-examples
+zstyle ':vcs_info:git+set-message:*' hooks\
+  git-hook-begin\
+  git-push-status
+
+  # 最初に呼び出すフック。
+  # .git ディレクトリ内部などにいる場合、リポジトリ内部にいるが、
+  # git status --porcelain など一部の git コマンドが使えない（エラーになる）ため、
+  # そういう場所では動かないようにする
+  function +vi-git-hook-begin() {
+    if [[ $(command git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]]; then
+      # 0以外を返すとそれ以降のフック関数は呼び出されない
+      return 1
+    fi
+
+    return 0
+  }
+
+  # 未 push のコミット数を misc (%m) に表示
+  function +vi-git-push-status() {
+    # zstyle formats, actionformats の2番目のメッセージのみ対象にする
+
+    # if [[ "$1" != "1" ]]; then
+    #   return 0
+    # fi
+
+    # master ブランチでのみ実行
+    # if [[ "${hook_com[branch]}" != "master"]]; then
+    #   return 0
+    # fi
+
+    local ahead
+    ahead=$(command git rev-list ${hook_com[branch]}@{upstream}..${hook_com[branch]} 2>/dev/null \
+            | wc -l \
+            | tr -d ' ')
+
+        if [[ "$ahead" -gt 0 ]]; then
+            # misc (%m) に追加
+            hook_com[misc]+="%F{220}(  ${ahead})"
+        fi
+  }
 
 # precmd から呼ばれる関数
 function _precmd_vcs_info () {
@@ -71,6 +116,8 @@ function _precmd_vcs_info () {
 # precmd にフックして、コマンドを実行する
 add-zsh-hook precmd _precmd_vcs_info
 
+# root ユーザーのときはプロンプトの色を変える
+# mac で root 昇格はまずないので外した
 # case ${USERNAME} in
 # 'root')
 # PROMPT=$PROMPT"
