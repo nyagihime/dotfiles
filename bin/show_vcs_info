@@ -9,8 +9,21 @@ if test ${#user_name} -gt 4; then
   user_name=${user_name::4}..
 fi
 
-if test ${#email_address} -gt 3; then
-  email_address=${email_address::3}..
+if test ${#email_address} -gt 6; then
+  # アカウント部分を抽出
+  email_account=${email_address%@*}
+  # アカウント部分が4文字以上なら詰める
+  if test ${#email_account} -gt 4; then
+    email_account=${email_account:: 2}**${email_account: -2}
+  fi
+
+  # ドメイン部分を抽出
+  email_domain=${email_address##*@}
+  # ドメイン部分の最初のドットまでを取得して、どのアドレス化を判別しやすくする
+  # （ただ、これだと、example@mail.example.com みたいな場合 mail になっちゃうけど
+  email_domain=${email_domain%%.*}
+
+  email_address=${email_account}@${email_domain}
 fi
 
 if [ $1 = "--name-only" ]; then
@@ -40,8 +53,14 @@ if [ ! -z ${branch_name} ]; then
     display_branch_name="#[fg=colour75]${branch_disp}";;
   esac
 
+  # echo の中に以下の行を追加すると、表示できる
+  # ブランチ情報
+  #  "#[fg=yellow] :${display_branch_name}"\
+  # ユーザー情報
+  #  "#[fg=yellow] :${vcs_usr}"\
+  # TODO: --name-only みたいに、コマンドライン引数でブランチ名を出すかを出し分けるようにする
+
   echo "#[bg=colour240 fg=colour236] "\
-       "#[fg=yellow] :${display_branch_name}"\
        "#[fg=yellow] :${vcs_usr}"\
        "#[default]"
 else
