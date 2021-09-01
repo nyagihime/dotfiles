@@ -80,8 +80,9 @@ zstyle ':vcs_info:git+set-message:*' hooks\
         fi
   }
 
-# precmd から呼ばれる関数
-function _precmd_vcs_info () {
+# プロンプト組み立て
+# この関数は precmd から呼ばれる
+function _precmd_generate_left_prompt () {
   LANG=en_US.UTF-8 vcs_info
   local -a messages
   local prompt_cursor
@@ -91,6 +92,7 @@ function _precmd_vcs_info () {
   #   $vcs_info_msg_0_ : 通常メッセージ用
   #   $vcs_info_msg_1_ : 警告メッセージ用
   #   $vcs_info_msg_2_ : エラーメッセージ用
+  #   -z 文字列の長さが0ならTRUE
   if [[ -z ${vcs_info_msg_0_} ]]; then
       # vcs_info で何も取得していない場合はプロンプトを表示しない
       vcs_prompt=""
@@ -107,14 +109,31 @@ function _precmd_vcs_info () {
       vcs_prompt="${(j: :)messages}"
       folder_icon=""
   fi
+
+  # プロンプト下段矢印マークの基本スタイル
+  prompt_arrow="%F{red}❯${reset_color}"
+
+  # $VIRTUAL_ENV を表示させる
+  # ZSH でプロンプトをいじる場合、venvのアクティベートスクリプトによるプロンプト書き換えが
+  # 上書かれるのか、うまく表示されないので、自力で実装する
+  # .venv/bin/activate の中で PS1 を書き換えてるところと同じようなことをやればよい
+  venv=""
+  # -n 文字列の長さが0以上ならTRUE
+  if [[ -n $VIRTUAL_ENV ]]; then
+    # %F{024} / %F{239}
+    venv="%F{024} $(basename "${VIRTUAL_ENV}")${reset_color}"
+    prompt_arrow="%F{024}❯${reset_color}"
+  fi
+
+
   # プロンプトに改行を入れるには、クオートを閉じずに改行すれば良い
   # ただし、インデントも反映されるので、改行する場合は左に詰める必要がある
   PROMPT="%F{034}${folder_icon} : %(1~,%1~,%~)${reset_color} ${vcs_prompt}
-%F{red}❯ ${reset_color}"
+${venv}${prompt_arrow} "
 
 }
 # precmd にフックして、コマンドを実行する
-add-zsh-hook precmd _precmd_vcs_info
+add-zsh-hook precmd _precmd_generate_left_prompt
 
 # root ユーザーのときはプロンプトの色を変える
 # mac で root 昇格はまずないので外した
