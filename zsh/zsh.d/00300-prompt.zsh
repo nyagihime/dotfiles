@@ -19,7 +19,7 @@ zstyle ':vcs_info:git:*' check-for-changes true
 # git add されてるけど commit されていないファイルがあると
 # 表示されるメッセージのフォーマット
 # formats に %c を書くと展開される
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow} "
+zstyle ':vcs_info:git:*' stagedstr "%F{green} "
 
 # unstagedstr の設定
 # 変更があったけど、 git add されていないファイルがあると
@@ -157,4 +157,4 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}=
 
 # caniuse-cli の Tab補完に対応
 # @see https://www.npmjs.com/package/caniuse-cli
-. <(caniuse --completion)
+# . <(caniuse --completion)

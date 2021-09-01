@@ -6,8 +6,11 @@
 # ------------------------------------------------
 
 # tmux （with fzf）起動
+# Hyper を立ち上げたときだけ起動するように変更
+#（VSCodeやIntelliJでは普通のターミナルにしたい）
 # @see https://qiita.com/ssh0/items/a9956a74bff8254a606a
-if [[ ! -n $TMUX ]]; then
+# @see https://qiita.com/otyamura/items/27e673a80952924b30f8
+if [[ ! -n $TMUX && $TERM_PROGRAM == 'Hyper' ]]; then
   $DOTFILES/bin/bootmux
 fi
 
