@@ -28,3 +28,14 @@ git config --global commit.template $DOTFILES/git/commit_template
 （このスクリプトはステージングファイル０のまま初期コミットを行います）
 
 sh で実行するか、実行権限を与えた上で alias にして使います。
+
+## フォント関連
+
+アイコンフォントは、NERDFONTS 互換
+そのため、ターミナルで使用するフォントもこれに対応したものが必要。
+
+カスタマイすするときにアイコンフォントを探す場合は
+
+NERD FONTS の [Cheat Sheet](https://www.nerdfonts.com/cheat-sheet)から探す
+
+を参照
