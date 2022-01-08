@@ -18,6 +18,6 @@ autoload -Uz _zinit
 # プラグインの有効化（個々に記述して設定ファイルをリロードすると自動的にインストールされる）
 zinit light zsh-users/zsh-completions                   # オートコンプリート
 zinit light zsh-users/zsh-autosuggestions               # コマンドサジェスト
-zinit light zdharma/fast-syntax-highlighting            # コマンドシンタックスハイライト
+zinit light zdharma-continuum/fast-syntax-highlighting  # コマンドシンタックスハイライト
 zinit light g-plane/zsh-yarn-autocompletions            # yarn 補完
 zinit light MichaelAquilina/zsh-autoswitch-virtualenv   # python の仮想環境に入ると自動で activate

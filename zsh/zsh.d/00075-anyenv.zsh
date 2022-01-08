@@ -8,6 +8,9 @@
 
 export ANYENV_ROOT=$HOME/.anyenv
 
+# anyenvにパスを通す
+export PATH="$HOME/.anyenv/bin:$PATH"
+
 if [ -d $ANYENV_ROOT ]; then
 	export PATH="$HOME/.anyenv/bin:$PATH"
   for D in `command ls $ANYENV_ROOT/envs`

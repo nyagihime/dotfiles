@@ -26,3 +26,13 @@ export PATH="/Users/yanagimachi/.local/bin:$PATH"
 # ICU4C
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
+# Homebrew
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+# ↑のコマンドで展開されるexportの中身を直接書き出したやつ↓
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"

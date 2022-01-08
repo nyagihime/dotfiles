@@ -5,6 +5,9 @@
 # ここに置く
 # ------------------------------------------------
 
+# tmux にパスを通す
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
+
 # tmux （with fzf）起動
 # Hyper を立ち上げたときだけ起動するように変更
 #（VSCodeやIntelliJでは普通のターミナルにしたい）
