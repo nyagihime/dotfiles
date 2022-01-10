@@ -1,0 +1,1 @@
+sh $DOTFILES/bin/auto-register-ssh-keys.sh

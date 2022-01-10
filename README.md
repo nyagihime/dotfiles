@@ -41,6 +41,8 @@ git clone git@gitlab.ju9box.net:nyagihime/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm
 ln -s $(pwd)/zsh/zshrc ~/.zshrc
+ln -s $(pwd)/zsh/zlogin ~/.zlogin
+ln -s $(pwd)/zsh/zlogout ~/.zlogout
 ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
 ln -s $(pwd)/vim/dotvim/ ~/.vim
 ln -s $(pwd)/vim/vimrc ~/.vimrc
@@ -103,6 +105,14 @@ Zinit 自体のアップデート
 ```bash
 zinit self-update
 ```
+
+## ssh-agent 自動登録
+
+`bin/auto-register-ssh-keys.sh` は、
+`~/.ssh` 配下の、末尾が`_rsa` `_ecdsa` `_ed25519` のファイルに対して
+自動的に agent への登録を試みます。
+
+パスフレーズ付きの鍵を登録する場合は、`bin/ssh-agent-pass-phrase-manager.sh` を実行します
 
 ## TODO
 
