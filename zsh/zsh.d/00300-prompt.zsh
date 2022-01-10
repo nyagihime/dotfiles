@@ -157,8 +157,9 @@ add-zsh-hook precmd _precmd_generate_left_prompt
 # ------------------------------------------------
 # 補完候補をカーソルで選択できるようにする
 # ※ compinit は起動プロセスの中で１回呼べばOK。プラグインとかで呼んでたりするならここではスルーできる
-# autoload -U compinit
-# compinit -u
+# ※なぜか有効にならなくなったからやっぱり呼ぶように変更
+autoload -U compinit
+compinit -u
 zstyle ':completion:*:default' menu select=1
 
 # tab 補完で大文字小文字を区別しない
