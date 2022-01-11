@@ -1,0 +1,4 @@
+#!/bin/sh
+# マージ済みブランチの削除
+PROTECTED_BRANCHES='master|main|develop'
+git branch --merged | egrep -v "\*|${PROTECTED_BRANCHES}" | xargs git branch -d

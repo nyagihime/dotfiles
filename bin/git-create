@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# git create
+# -------------------------------------------------------
+# ユーザー情報を指定して、ローカルコンフィグをセットアップした上で
+# Git init を行い、空の初期コミットを行います
+# インストール方法
+# パスの通ったところにリンクしておく
+# ln -s $(pwd)/git-create /usr/local/bin/git-create
+
+# main() の内部で対応するユーザーのメールアドレスを指定している
+users=("nagi" "#7")
+
+function showUsers() {
+  i=0
+  for u in ${users[@]}; do
+    echo "${u}"
+    let i++
+  done
+}
+
+function main() {
+  user=$(showUsers|fzf)
+
+  case $user in
+    "nagi" )
+      email="nyagi.hime@gmail.com";;
+    "#7" )
+      email="nyagi.hime@gmail.com";;
+  esac
+
+  echo "This repository will create with following account:"
+  echo "  User: ${user}"
+  echo "  Email: ${email}"
+
+  git init
+  git config --local user.name ${user}
+  git config --local user.email ${email}
+  git commit --allow-empty -m 'Create Repo'
+}
+
+main $@

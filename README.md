@@ -49,6 +49,8 @@ ln -s $(pwd)/vim/vimrc ~/.vimrc
 ln -s $(pwd)/alacritty ~/.config/alacritty/alacritty.yaml
 ln -s $(pwd)/hyper/hyper.js ~/.hyper.js
 ln -s $(pwd)/hyper/hyper_plugins ~/.hyper_plugins
+ln -s $(pwd)/bin/git-create /usr/local/bin/git-create
+ln -s $(pwd)/bin/git-delete-merged-branch /usr/local/bin/git-delete-merged-branch
 git config --global commit.template $(pwd)/git/commit_template
 git config --global core.excludesfile $(pwd)/git/gitignore_global
 ...
