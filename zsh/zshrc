@@ -13,6 +13,8 @@ source $DOTFILES/zsh/zsh.d/00200-colors.zsh
 source $DOTFILES/zsh/zsh.d/00300-prompt.zsh
 source $DOTFILES/zsh/zsh.d/00400-zplug.zsh
 source $DOTFILES/zsh/zsh.d/00410-tmux.zsh
+source $DOTFILES/zsh/zsh.d/00500-zsh-hooks.zsh
+
 
 # なんか最後にしろというから最後に移した。
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
