@@ -16,6 +16,36 @@ alias ..='cd ..'
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
 
+# ----- プロジェクトショートカット
+# i = InfoLounge
+# j = jukebox web service
+# a = jukebox arduino
+# p = jukebox raspberry pi
+alias i='cd ~/InfoLounge/projects'
+alias j='cd ~/ju9box/workspace'
+alias a='cd ~/ju9box/ws-arduino'
+alias p='cd ~/ju9box/ws-raspberry'
+
+# ----- Git
+function g() {
+    echo "git shortcuts
+gb:     show branch
+        = git branch
+gnb:    create new branch
+        = git checkout -b
+gbname: rename branch
+        = git branch -m
+gs:     switch branch
+        = git switch
+gst:    show status
+        = git status
+"
+}
+alias gb='git branch'
+alias gnb='git checkout -b'
+alias gbname='git branch -m'
+alias gs='git switch'
+alias gst='git status'
 # ----- その他
 alias bootmux='$DOTFILES/bin/bootmux'
 
