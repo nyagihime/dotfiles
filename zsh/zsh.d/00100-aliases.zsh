@@ -39,6 +39,8 @@ gs:     switch branch
         = git switch
 gst:    show status
         = git status
+gg:     show current repository in GUI (sublime merge)
+        = smerge .
 "
 }
 alias gb='git branch'
@@ -46,6 +48,8 @@ alias gnb='git checkout -b'
 alias gbname='git branch -m'
 alias gs='git switch'
 alias gst='git status'
+alias gg='smerge .'
+
 # ----- その他
 alias bootmux='$DOTFILES/bin/bootmux'
 
