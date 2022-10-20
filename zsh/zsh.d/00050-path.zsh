@@ -21,7 +21,7 @@ export PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig"
 export PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6' --enable-shared"
 
 # python / poetry
-export PATH="/Users/yanagimachi/.local/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
 
 # ICU4C
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
@@ -38,7 +38,7 @@ export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 
 # PlatformIO
-export PATH="/Users/nagi/.platformio/penv/bin:$PATH"
+export PATH="~/.platformio/penv/bin:$PATH"
 
 # ni config
 # @https://github.com/antfu/ni
