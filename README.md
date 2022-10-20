@@ -37,7 +37,7 @@
 > 既に ~/.zshrc や ~/.tmux.conf などがある場合はリンクを貼る前に削除しておくこと
 
 ```shell
-git clone git@gitlab.ju9box.net:nyagihime/dotfiles.git ~/dotfiles
+git clone git@github.com:nyagihime/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm
 ln -s $(pwd)/zsh/zshrc ~/.zshrc
@@ -114,7 +114,8 @@ zinit self-update
 `~/.ssh` 配下の、末尾が`_rsa` `_ecdsa` `_ed25519` のファイルに対して
 自動的に agent への登録を試みます。
 
-パスフレーズ付きの鍵を登録する場合は、`bin/ssh-agent-pass-phrase-manager.sh` を実行します
+~~パスフレーズ付きの鍵を登録する場合は、`bin/ssh-agent-pass-phrase-manager.sh` を実行します~~
+とりあえず手で頑張る。
 
 ## TODO
 
@@ -126,3 +127,4 @@ zinit self-update
 - [x] セッション閉じたときも番号を詰められるか調べる
 - [ ] zshrc のうち、aws cli とか gcloud cli とかの設定まわりは別ファイルに分けたい
 - [ ] 使ってないターミナルエミュレータの設定は捨てて少し整理する
+- [x] GitHubに引っ越す
