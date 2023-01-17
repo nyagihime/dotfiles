@@ -21,5 +21,6 @@ zinit light zsh-users/zsh-completions                   # オートコンプリ�
 zinit light zsh-users/zsh-autosuggestions               # コマンドサジェスト
 zinit light zdharma-continuum/fast-syntax-highlighting  # コマンドシンタックスハイライト
 zinit light g-plane/zsh-yarn-autocompletions            # yarn 補完
+zinit light spaceship-prompt/spaceship-prompt           # Spaceship prompt
 # 自作のフックとバッティングするのでやめた
 # zinit light MichaelAquilina/zsh-autoswitch-virtualenv   # python の仮想環境に入ると自動で activate

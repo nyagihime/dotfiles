@@ -10,7 +10,8 @@ source $DOTFILES/zsh/zsh.d/00050-path.zsh
 source $DOTFILES/zsh/zsh.d/00075-anyenv.zsh
 source $DOTFILES/zsh/zsh.d/00100-aliases.zsh
 source $DOTFILES/zsh/zsh.d/00200-colors.zsh
-source $DOTFILES/zsh/zsh.d/00300-prompt.zsh
+# source $DOTFILES/zsh/zsh.d/00300-prompt.zsh
+source $DOTFILES/zsh/zsh.d/00350-autocompletions.zsh
 source $DOTFILES/zsh/zsh.d/00400-zplug.zsh
 source $DOTFILES/zsh/zsh.d/00410-tmux.zsh
 source $DOTFILES/zsh/zsh.d/00500-zsh-hooks.zsh
