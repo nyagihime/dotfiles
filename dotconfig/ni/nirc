@@ -1,2 +1,2 @@
-defaultAgent=yarn
-globalAgent=yarn
+defaultAgent=pnpm
+globalAgent=pnpm
