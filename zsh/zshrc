@@ -6,6 +6,7 @@
 export DOTFILES=$HOME/dotfiles
 
 source $DOTFILES/zsh/zsh.d/00001-base.zsh
+source $DOTFILES/zsh/zsh.d/00010-env.zsh
 source $DOTFILES/zsh/zsh.d/00050-path.zsh
 source $DOTFILES/zsh/zsh.d/00075-anyenv.zsh
 source $DOTFILES/zsh/zsh.d/00100-aliases.zsh
