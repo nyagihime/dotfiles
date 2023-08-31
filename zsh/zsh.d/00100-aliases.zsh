@@ -21,10 +21,13 @@ alias ..3='cd ../../..'
 # j = jukebox web service
 # a = jukebox arduino
 # p = jukebox raspberry pi
+# d = DevKinsta
+
 alias i='cd ~/InfoLounge/projects'
 alias j='cd ~/ju9box/workspace'
 alias a='cd ~/ju9box/ws-arduino'
 alias p='cd ~/ju9box/ws-raspberry'
+alias d='cd ~/DevKinsta/public'
 
 # ----- Git
 function g() {

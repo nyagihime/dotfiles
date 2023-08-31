@@ -22,6 +22,7 @@ export PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/inc
 
 # python / poetry
 export PATH="~/.local/bin:$PATH"
+export PATH="/Users/nagi/.local/bin:$PATH"
 
 # ICU4C
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
@@ -43,3 +44,6 @@ export PATH="~/.platformio/penv/bin:$PATH"
 # ni config
 # @https://github.com/antfu/ni
 export NI_CONFIG_FILE=$DOTFILES/dotconfig/ni/nirc
+
+# Sublime Merge
+export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"

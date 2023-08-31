@@ -13,7 +13,7 @@ export PATH="/usr/local/opt/ncurses/bin:$PATH"
 #（VSCodeやIntelliJでは普通のターミナルにしたい）
 # @see https://qiita.com/ssh0/items/a9956a74bff8254a606a
 # @see https://qiita.com/otyamura/items/27e673a80952924b30f8
-if [[ ! -n $TMUX && $TERM_PROGRAM == 'Hyper' ]]; then
+if [[ ! -n $TMUX && $TERM_PROGRAM == 'Hyper' ]] || [[ ! -n $TMUX && $TERM_PROGRAM == 'Tabby' ]]; then
   $DOTFILES/bin/bootmux
 fi
 
