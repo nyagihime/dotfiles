@@ -46,11 +46,14 @@ ln -s $(pwd)/zsh/zlogout ~/.zlogout
 ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
 ln -s $(pwd)/vim/dotvim/ ~/.vim
 ln -s $(pwd)/vim/vimrc ~/.vimrc
-ln -s $(pwd)/alacritty ~/.config/alacritty/alacritty.yaml
 ln -s $(pwd)/hyper/hyper.js ~/.hyper.js
 ln -s $(pwd)/hyper/hyper_plugins ~/.hyper_plugins
 ln -s $(pwd)/bin/git-create /usr/local/bin/git-create
 ln -s $(pwd)/bin/git-delete-merged-branch /usr/local/bin/git-delete-merged-branch
+ln -s $(pwd)/alacritty ~/.config/alacritty/alacritty.yaml
+ln -s $(pwd)/ni ~/.config/ni
+ln -s $(pwd)/nodenv-config ~/.config/nodenv
+
 git config --global commit.template $(pwd)/git/commit_template
 git config --global core.excludesfile $(pwd)/git/gitignore_global
 ...
