@@ -16,6 +16,8 @@ alias ..='cd ..'
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
 
+alias o='open .'
+
 # ----- プロジェクトショートカット
 # i = InfoLounge
 # j = jukebox web service
@@ -28,6 +30,12 @@ alias j='cd ~/ju9box/workspace'
 alias a='cd ~/ju9box/ws-arduino'
 alias p='cd ~/ju9box/ws-raspberry'
 alias d='cd ~/DevKinsta/public'
+
+alias o-i='open ~/InfoLounge/projects'
+alias o-j='open ~/ju9box/workspace'
+alias o-a='open ~/ju9box/ws-arduino'
+alias o-p='open ~/ju9box/ws-raspberry'
+alias o-d='open ~/DevKinsta/public'
 
 # ----- Git
 function g() {
