@@ -2,4 +2,6 @@
 .vscode/
 *.log
 
+.DS_Store
+
 # 各種プラグインのディレクトリはそれぞれのフォルダの .gitignore で除外しておくこと
