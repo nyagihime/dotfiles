@@ -47,3 +47,6 @@ export NI_CONFIG_FILE=$DOTFILES/dotconfig/ni/nirc
 
 # Sublime Merge
 export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
