@@ -39,3 +39,20 @@ sh で実行するか、実行権限を与えた上で alias にして使いま�
 NERD FONTS の [Cheat Sheet](https://www.nerdfonts.com/cheat-sheet)から探す
 
 を参照
+
+## gitconfig
+
+グローバルな gitconfig を `gitconfig.global` に移動したので、Git セットアップが終わったらリンクを設定すること
+
+```sh
+ln -s /Users/nagi/dotfiles/git/gitconfig.global ~/.gitconfig
+```
+
+また、ここにはユーザー設定などは含めたくないので、それらは `~/.gitconfig.local` に設定すること
+
+```sh
+[user]
+  name =
+  email =
+  signingkey =
+```

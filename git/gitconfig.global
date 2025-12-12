@@ -1,0 +1,20 @@
+[include]
+  # ユーザー設定など、コミットしないほうが良さそうなファイルは分離
+  path = ~/.gitconfig.local
+[core]
+  excludesfile = /Users/nagi/dotfiles/git/gitignore_global
+  autocrlf = input
+[init]
+  defaultBranch = main
+[pull]
+        rebase = false
+[http]
+        postBuffer = 104857600
+
+# GPG署名 with 1Password
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true

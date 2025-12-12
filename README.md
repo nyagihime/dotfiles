@@ -59,6 +59,10 @@ ln -s $(pwd)/bin/git-delete-merged-branch /usr/local/bin/git-delete-merged-branc
 ln -s $(pwd)/alacritty ~/.config/alacritty/alacritty.yaml
 ln -s $(pwd)/ni ~/.config/ni
 ln -s $(pwd)/nodenv-config ~/.config/nodenv
+# すでに ~/.gitconfig がある場合は削除してから実行
+ln -s $(pwd)/git/gitconfig.global ~/.gitconfig
+cp $(pwd)/git/gitconfig.local.example ~/.gitconfig.local
+# コピーした .gitconfig.local にユーザー情報とGPG署名用の鍵を記入
 
 git config --global commit.template $(pwd)/git/commit_template
 git config --global core.excludesfile $(pwd)/git/gitignore_global
