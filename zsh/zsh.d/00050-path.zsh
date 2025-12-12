@@ -5,6 +5,9 @@
 # 記述順には注意！
 # ------------------------------------------------
 
+# /usr/local/bin の優先度を上げる
+export PATH="/usr/local/bin:$PATH"
+
 # GoLang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
@@ -50,3 +53,16 @@ export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Moddable というか xs-dev
+# xs-dev によって設定された環境変数は ~/.local/share/xs-dev-export.sh に記述されているが
+# 自動的にシェルにインポートされるわけではないのでここで追加しておく必要がある
+source ~/.local/share/xs-dev-export.sh
+
+
+# Android SDK
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+
+# npm global packages
+export PATH=$PATH:`npm prefix --location=global`/bin

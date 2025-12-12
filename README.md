@@ -36,9 +36,15 @@
 
 > 既に ~/.zshrc や ~/.tmux.conf などがある場合はリンクを貼る前に削除しておくこと
 
+zsh/zsh.d/00010-env.zsh に GitHub の PAT などをエクスポートするが、このファイルは
+コミットすべきではないので ignore されている
+そのためリポジトリには含まれないのでセットアップ時に生成するのを忘れずに
+（やっぱりインストールスクリプト作るべきか…）
+
 ```shell
 git clone git@github.com:nyagihime/dotfiles.git ~/dotfiles
 cd ~/dotfiles
+touch zsh/zsh.d/00010-env.zsh
 git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm
 ln -s $(pwd)/zsh/zshrc ~/.zshrc
 ln -s $(pwd)/zsh/zlogin ~/.zlogin

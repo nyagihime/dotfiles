@@ -6,8 +6,8 @@
 # ------------------------------------------------
 
 # ----- 表示系
-alias ll='ls -la'
-alias ls='ls -G'
+alias ls='ls -Gh'
+alias ll='ls -la' # ls のエイリアスが ls -Gh なので、これ以降 ls のエイリアスには -Gh を含めないでも同様に作用する
 alias cl='clear'
 alias .r='source ~/.zshrc'
 
